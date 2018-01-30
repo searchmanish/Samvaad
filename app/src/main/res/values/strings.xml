@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Samvaad</string>
+    <string name="need_an_account">NEED AN ACCOUNT?</string>
+    <string name="display_name">Display name</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="create_account">Create Account</string>
 </resources>
