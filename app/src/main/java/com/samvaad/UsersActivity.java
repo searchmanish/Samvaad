@@ -1,5 +1,7 @@
 package com.samvaad;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,9 +10,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class UsersActivity extends AppCompatActivity {
@@ -50,6 +55,19 @@ private DatabaseReference mUserDatabase;
             protected void populateViewHolder(UsersViewHolder viewHolder, Users model, int position) {
                 viewHolder.setName(model.getName());
                 viewHolder.setStatus(model.getStatus());
+                viewHolder.setUserImage(model.getThumb_image(),getApplicationContext());
+
+                //To Open Profile page
+                final String user_id = getRef(position).getKey();
+                viewHolder.mView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent profileIntent = new Intent(UsersActivity.this,ProfileActivity.class);
+                        profileIntent.putExtra("user_id",user_id);
+                        startActivity(profileIntent);
+
+                    }
+                });
 
             }
         };
@@ -76,6 +94,13 @@ private DatabaseReference mUserDatabase;
         {
             TextView userStatusView = (TextView)mView.findViewById(R.id.user_single_status);
             userStatusView.setText(status);
+        }
+
+        public void setUserImage(String thumb_image,Context ctx){
+
+            CircleImageView userImageView = (CircleImageView)mView.findViewById(R.id.user_single_image);
+            Glide.with(ctx).load(thumb_image).placeholder(R.drawable.avtar).into(userImageView);
+
         }
     }
 }

@@ -78,6 +78,7 @@ public class RegisterActivity extends AppCompatActivity {
                     userMap.put("name", display_name);
                     userMap.put("status", "Hi there i m using samvaad app");
                     userMap.put("image", "default");
+                    userMap.put("thumb_image","default");
 
                     mDatabase.setValue(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override

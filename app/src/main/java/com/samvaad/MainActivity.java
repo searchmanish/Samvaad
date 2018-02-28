@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
             sendToStart();
         }
 
-        if(item.getItemId()==R.id.main_users_btn);
+        if(item.getItemId()==R.id.main_users_btn)
         {
             Intent usersIntent = new Intent(MainActivity.this,UsersActivity.class);
             startActivity(usersIntent);
